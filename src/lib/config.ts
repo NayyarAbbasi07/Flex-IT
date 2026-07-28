@@ -14,13 +14,13 @@ export const siteConfig = {
 
   /** WhatsApp number in international format without + or spaces */
   whatsapp: {
-    number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "923001234567",
+    number: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "923330215663",
     defaultMessage: "Hello Flex it!\n\nI'd like to know more about your collection.",
   },
 
   contact: {
     email: "hello@flexit.store",
-    phone: "+92 300 1234567",
+    phone: "0333 0215663",
     city: "Pakistan",
   },
 
