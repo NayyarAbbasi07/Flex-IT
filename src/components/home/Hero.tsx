@@ -39,37 +39,32 @@ export function Hero() {
 
       <Container className="relative flex min-h-[100svh] flex-col justify-end pb-16 pt-28 sm:justify-center sm:pb-24 sm:pt-32">
         <div className="max-w-2xl">
-          <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
-          >
+          <p className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
             {siteConfig.name}
-          </motion.p>
+          </p>
 
           <motion.h1
-            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="mt-4 font-display text-2xl font-semibold tracking-tight text-foreground/90 sm:mt-5 sm:text-3xl md:text-4xl"
           >
             Curated Fashion.
           </motion.h1>
 
           <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
             className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
             Imported Premium Thrift Sneakers Curated For Every Style.
           </motion.p>
 
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
             <Link href="/shop" className="focus-ring rounded-xl">
