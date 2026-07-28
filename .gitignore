@@ -22,6 +22,10 @@
 .wrangler
 .dev.vars
 
+# audits
+lighthouse-report.json
+lighthouse.html
+
 # production
 /build
 

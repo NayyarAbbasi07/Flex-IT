@@ -43,28 +43,18 @@ export function Hero() {
             {siteConfig.name}
           </p>
 
-          <motion.h1
-            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-4 font-display text-2xl font-semibold tracking-tight text-foreground/90 sm:mt-5 sm:text-3xl md:text-4xl"
-          >
+          <h1 className="mt-4 font-display text-2xl font-semibold tracking-tight text-foreground/90 sm:mt-5 sm:text-3xl md:text-4xl">
             Curated Fashion.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.06, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg"
-          >
+          <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
             Imported Premium Thrift Sneakers Curated For Every Style.
-          </motion.p>
+          </p>
 
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
             <Link href="/shop" className="focus-ring rounded-xl">

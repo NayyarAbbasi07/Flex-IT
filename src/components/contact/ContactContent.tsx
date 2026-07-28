@@ -31,7 +31,7 @@ export function ContactContent() {
           rel="noopener noreferrer"
           className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition hover:shadow-md focus-ring"
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#128C7E]/15 text-[#128C7E]">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#075E54]/15 text-[#075E54]">
             <MessageCircle className="h-5 w-5" />
           </span>
           <span>
