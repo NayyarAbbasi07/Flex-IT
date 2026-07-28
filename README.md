@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Flex it! — Curated Fashion
 
-## Getting Started
+Premium curated imported thrift fashion storefront.
 
-First, run the development server:
+**Live:** https://flex-it-store.pages.dev
+
+## Stack
+
+- Next.js 16 (static export)
+- React 19 + TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- Lucide Icons
+- Cloudflare Pages (CDN, HTTPS, compression)
+
+## Quick start
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Description |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for SEO |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | International WhatsApp number (no `+` or spaces) |
 
-## Learn More
+Also edit brand defaults in `src/lib/config.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy (Cloudflare Pages)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run pages:deploy
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Or connect this GitHub repo in the Cloudflare dashboard:
 
-## Deploy on Vercel
+- **Framework preset:** None (static)
+- **Build command:** `npm run build`
+- **Build output directory:** `out`
+- **Root directory:** `/`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Central configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All brand settings live in **`src/lib/config.ts`**:
+
+- Brand name & tagline
+- WhatsApp number
+- Contact email / phone
+- Social links (Instagram, Facebook, TikTok)
+- Navigation
+- Currency
+
+Products live in **`src/lib/data.ts`**.
+
+## Adding product images
+
+1. Put files in `public/products/` (example: `public/products/af1-1.jpg`)
+2. Update the product in `src/lib/data.ts`:
+
+```ts
+images: [
+  {
+    src: "/products/af1-1.jpg",
+    alt: "Nike Air Force 1 White",
+    isPlaceholder: false,
+  },
+]
+```
+
+## Adding a logo
+
+1. Add `public/logo.svg` (or `.png`)
+2. Replace the text logo in `src/components/layout/Navbar.tsx` and `Footer.tsx` with `next/image`
+
+## Scripts
+
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Local development |
+| `npm run build` | Production static build → `out/` |
+| `npm run lint` | ESLint |
+| `npm run pages:deploy` | Build + deploy to Cloudflare Pages |
