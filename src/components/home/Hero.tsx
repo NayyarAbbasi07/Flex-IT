@@ -4,41 +4,36 @@ import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { siteConfig } from "@/lib/config";
+import { products } from "@/lib/data";
 import { getGeneralWhatsAppUrl } from "@/lib/whatsapp";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { HeroShoeRotator } from "@/components/home/HeroShoeRotator";
+
+const ROTATOR_BRANDS = ["Nike", "Adidas", "Puma", "HOKA"] as const;
+
+function getRotatorShoes() {
+  return ROTATOR_BRANDS.map(
+    (brand) =>
+      products.find((p) => p.brand === brand && p.featured) ||
+      products.find((p) => p.brand === brand)
+  ).filter((p): p is NonNullable<typeof p> => Boolean(p));
+}
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
+  const rotatorShoes = getRotatorShoes();
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-[image:var(--gradient-mesh)]">
-      <div className="absolute inset-0 bg-[image:var(--gradient-hero)] opacity-80" aria-hidden />
+      <div className="absolute inset-0 bg-[image:var(--gradient-hero)] opacity-90" aria-hidden />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_40%,rgba(10,10,10,0.04),transparent_55%)]"
+        aria-hidden
+      />
 
-      {/* Full-bleed visual plane */}
-      <div className="absolute inset-0">
-        <PlaceholderImage
-          image={{
-            src: "",
-            alt: "Flex it! curated premium sneakers",
-            isPlaceholder: true,
-            placeholderHue: 0,
-          }}
-          fill
-          priority
-          sizes="100vw"
-          className="absolute inset-0 h-full w-full opacity-60"
-          imageClassName="object-cover"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/20 sm:via-white/70 sm:to-transparent"
-          aria-hidden
-        />
-      </div>
-
-      <Container className="relative flex min-h-[100svh] flex-col justify-end pb-16 pt-28 sm:justify-center sm:pb-24 sm:pt-32">
-        <div className="max-w-2xl">
+      <Container className="relative flex min-h-[100svh] flex-col justify-center gap-12 py-28 lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:py-32">
+        <div className="max-w-xl shrink-0 lg:max-w-2xl">
           <p className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
             {siteConfig.name}
           </p>
@@ -75,6 +70,10 @@ export function Hero() {
               </Button>
             </a>
           </motion.div>
+        </div>
+
+        <div className="w-full max-w-lg self-center lg:max-w-xl lg:flex-1">
+          <HeroShoeRotator shoes={rotatorShoes} />
         </div>
       </Container>
     </section>
