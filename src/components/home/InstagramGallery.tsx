@@ -5,12 +5,12 @@ import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { InstagramIcon } from "@/components/icons/SocialIcons";
 
 const gallery = [
-  { hue: 0, alt: "Flex it Instagram 1" },
-  { hue: 210, alt: "Flex it Instagram 2" },
-  { hue: 145, alt: "Flex it Instagram 3" },
-  { hue: 40, alt: "Flex it Instagram 4" },
-  { hue: 330, alt: "Flex it Instagram 5" },
-  { hue: 260, alt: "Flex it Instagram 6" },
+  { src: "/products/ig-1.jpg", alt: "Flex it curated white sneakers" },
+  { src: "/products/ig-2.jpg", alt: "Flex it Jordan style pair" },
+  { src: "/products/ig-3.jpg", alt: "Flex it classic skate sneakers" },
+  { src: "/products/ig-4.jpg", alt: "Flex it premium runners" },
+  { src: "/products/ig-5.jpg", alt: "Flex it black and white dunks" },
+  { src: "/products/ig-6.jpg", alt: "Flex it high top canvas" },
 ];
 
 export function InstagramGallery() {
@@ -44,10 +44,9 @@ export function InstagramGallery() {
             >
               <PlaceholderImage
                 image={{
-                  src: "",
+                  src: item.src,
                   alt: item.alt,
-                  isPlaceholder: true,
-                  placeholderHue: item.hue,
+                  isPlaceholder: false,
                 }}
                 fill
                 zoomOnHover

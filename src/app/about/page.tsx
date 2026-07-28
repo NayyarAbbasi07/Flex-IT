@@ -33,10 +33,9 @@ export default function AboutPage() {
         <div className="relative mx-auto mt-14 aspect-[21/9] max-w-5xl overflow-hidden rounded-3xl border border-border bg-muted">
           <PlaceholderImage
             image={{
-              src: "",
+              src: "/products/hero-stage.jpg",
               alt: "Flex it! studio atmosphere",
-              isPlaceholder: true,
-              placeholderHue: 0,
+              isPlaceholder: false,
             }}
             fill
             sizes="100vw"

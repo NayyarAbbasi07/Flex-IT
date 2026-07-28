@@ -12,10 +12,9 @@ export function AboutBrand() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-border bg-muted sm:aspect-[5/4] lg:aspect-[4/5]">
             <PlaceholderImage
               image={{
-                src: "",
+                src: "/products/about-brand.jpg",
                 alt: "Flex it! brand story",
-                isPlaceholder: true,
-                placeholderHue: 0,
+                isPlaceholder: false,
               }}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

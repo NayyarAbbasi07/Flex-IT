@@ -25,9 +25,9 @@ export const products: Product[] = [
     featured: true,
     newest: true,
     images: [
-      { src: "", alt: "Nike Air Force 1 White", isPlaceholder: true, placeholderHue: 210 },
-      { src: "", alt: "Nike Air Force 1 side view", isPlaceholder: true, placeholderHue: 215 },
-      { src: "", alt: "Nike Air Force 1 detail", isPlaceholder: true, placeholderHue: 200 },
+      { src: "/products/af1-1.jpg", alt: "Nike Air Force 1 White", isPlaceholder: false },
+      { src: "/products/af1-2.jpg", alt: "Nike Air Force 1 side view", isPlaceholder: false },
+      { src: "/products/af1-3.jpg", alt: "Nike Air Force 1 detail", isPlaceholder: false },
     ],
     tags: ["classic", "white", "everyday"],
     createdAt: "2026-07-20",
@@ -50,8 +50,8 @@ export const products: Product[] = [
     featured: true,
     newest: true,
     images: [
-      { src: "", alt: "Adidas Samba OG Black", isPlaceholder: true, placeholderHue: 0 },
-      { src: "", alt: "Adidas Samba OG pair", isPlaceholder: true, placeholderHue: 10 },
+      { src: "/products/samba-1.jpg", alt: "Adidas Samba OG Black", isPlaceholder: false },
+      { src: "/products/samba-2.jpg", alt: "Adidas Samba OG pair", isPlaceholder: false },
     ],
     tags: ["samba", "streetwear", "classic"],
     createdAt: "2026-07-18",
@@ -75,8 +75,8 @@ export const products: Product[] = [
     featured: true,
     newest: false,
     images: [
-      { src: "", alt: "New Balance 550 White Green", isPlaceholder: true, placeholderHue: 145 },
-      { src: "", alt: "New Balance 550 detail", isPlaceholder: true, placeholderHue: 150 },
+      { src: "/products/nb550-1.jpg", alt: "New Balance 550 White Green", isPlaceholder: false },
+      { src: "/products/nb550-2.jpg", alt: "New Balance 550 detail", isPlaceholder: false },
     ],
     tags: ["nb550", "court", "premium"],
     createdAt: "2026-07-10",
@@ -99,8 +99,8 @@ export const products: Product[] = [
     featured: true,
     newest: true,
     images: [
-      { src: "", alt: "Air Jordan 1 Retro High", isPlaceholder: true, placeholderHue: 0 },
-      { src: "", alt: "Air Jordan 1 side", isPlaceholder: true, placeholderHue: 350 },
+      { src: "/products/jordan-1.jpg", alt: "Air Jordan 1 Retro High", isPlaceholder: false },
+      { src: "/products/jordan-2.jpg", alt: "Air Jordan 1 side", isPlaceholder: false },
     ],
     tags: ["jordan", "retro", "hype"],
     createdAt: "2026-07-22",
@@ -123,7 +123,8 @@ export const products: Product[] = [
     featured: false,
     newest: true,
     images: [
-      { src: "", alt: "Puma Suede Classic XXI", isPlaceholder: true, placeholderHue: 230 },
+      { src: "/products/puma-1.jpg", alt: "Puma Suede Classic XXI", isPlaceholder: false },
+      { src: "/products/puma-2.jpg", alt: "Puma Suede Classic detail", isPlaceholder: false },
     ],
     tags: ["suede", "classic"],
     createdAt: "2026-07-15",
@@ -146,8 +147,8 @@ export const products: Product[] = [
     featured: true,
     newest: true,
     images: [
-      { src: "", alt: "ASICS GEL-Kayano 14", isPlaceholder: true, placeholderHue: 40 },
-      { src: "", alt: "ASICS GEL-Kayano 14 angle", isPlaceholder: true, placeholderHue: 35 },
+      { src: "/products/asics-1.jpg", alt: "ASICS GEL-Kayano 14", isPlaceholder: false },
+      { src: "/products/asics-2.jpg", alt: "ASICS GEL-Kayano 14 angle", isPlaceholder: false },
     ],
     tags: ["running", "tech", "premium"],
     createdAt: "2026-07-25",
@@ -170,7 +171,7 @@ export const products: Product[] = [
     featured: false,
     newest: false,
     images: [
-      { src: "", alt: "Converse Chuck 70 High", isPlaceholder: true, placeholderHue: 0 },
+      { src: "/products/converse-1.jpg", alt: "Converse Chuck 70 High", isPlaceholder: false },
     ],
     tags: ["chuck", "high-top"],
     createdAt: "2026-06-28",
@@ -193,7 +194,7 @@ export const products: Product[] = [
     featured: false,
     newest: false,
     images: [
-      { src: "", alt: "Vans Old Skool Black", isPlaceholder: true, placeholderHue: 0 },
+      { src: "/products/vans-1.jpg", alt: "Vans Old Skool Black", isPlaceholder: false },
     ],
     tags: ["skate", "classic"],
     createdAt: "2026-06-20",
@@ -216,8 +217,8 @@ export const products: Product[] = [
     featured: true,
     newest: true,
     images: [
-      { src: "", alt: "HOKA Clifton 9", isPlaceholder: true, placeholderHue: 260 },
-      { src: "", alt: "HOKA Clifton 9 sole", isPlaceholder: true, placeholderHue: 255 },
+      { src: "/products/hoka-1.jpg", alt: "HOKA Clifton 9", isPlaceholder: false },
+      { src: "/products/hoka-2.jpg", alt: "HOKA Clifton 9 sole", isPlaceholder: false },
     ],
     tags: ["comfort", "running", "premium"],
     createdAt: "2026-07-24",
@@ -240,7 +241,8 @@ export const products: Product[] = [
     featured: false,
     newest: true,
     images: [
-      { src: "", alt: "Nike Dunk Low Panda", isPlaceholder: true, placeholderHue: 0 },
+      { src: "/products/dunk-1.jpg", alt: "Nike Dunk Low Panda", isPlaceholder: false },
+      { src: "/products/af1-2.jpg", alt: "Nike Dunk Low alternate angle", isPlaceholder: false },
     ],
     tags: ["dunk", "panda"],
     createdAt: "2026-07-21",
@@ -263,7 +265,7 @@ export const products: Product[] = [
     featured: false,
     newest: true,
     images: [
-      { src: "", alt: "Adidas Gazelle Bold", isPlaceholder: true, placeholderHue: 330 },
+      { src: "/products/gazelle-1.jpg", alt: "Adidas Gazelle Bold", isPlaceholder: false },
     ],
     tags: ["gazelle", "platform"],
     createdAt: "2026-07-19",
@@ -286,7 +288,7 @@ export const products: Product[] = [
     featured: false,
     newest: false,
     images: [
-      { src: "", alt: "New Balance 2002R", isPlaceholder: true, placeholderHue: 210 },
+      { src: "/products/nb2002-1.jpg", alt: "New Balance 2002R", isPlaceholder: false },
     ],
     tags: ["2002r", "tech"],
     createdAt: "2026-06-15",
@@ -300,7 +302,7 @@ export const collections: Collection[] = [
     name: "Nike",
     description: "Air Force, Dunks, Jordans, and iconic Nike silhouettes.",
     productCount: products.filter((p) => p.collection === "nike").length,
-    image: { src: "", alt: "Nike Collection", isPlaceholder: true, placeholderHue: 0 },
+    image: { src: "/products/coll-nike.jpg", alt: "Nike Collection", isPlaceholder: false },
     featured: true,
   },
   {
@@ -309,7 +311,7 @@ export const collections: Collection[] = [
     name: "Adidas",
     description: "Sambas, Gazelles, and timeless three-stripe essentials.",
     productCount: products.filter((p) => p.collection === "adidas").length,
-    image: { src: "", alt: "Adidas Collection", isPlaceholder: true, placeholderHue: 210 },
+    image: { src: "/products/coll-adidas.jpg", alt: "Adidas Collection", isPlaceholder: false },
     featured: true,
   },
   {
@@ -318,7 +320,7 @@ export const collections: Collection[] = [
     name: "New Balance",
     description: "550s, 2002Rs, and premium lifestyle runners.",
     productCount: products.filter((p) => p.collection === "new-balance").length,
-    image: { src: "", alt: "New Balance Collection", isPlaceholder: true, placeholderHue: 145 },
+    image: { src: "/products/coll-nb.jpg", alt: "New Balance Collection", isPlaceholder: false },
     featured: true,
   },
   {
@@ -327,7 +329,7 @@ export const collections: Collection[] = [
     name: "Puma",
     description: "Suede classics and sport-inspired streetwear kicks.",
     productCount: products.filter((p) => p.collection === "puma").length,
-    image: { src: "", alt: "Puma Collection", isPlaceholder: true, placeholderHue: 230 },
+    image: { src: "/products/coll-puma.jpg", alt: "Puma Collection", isPlaceholder: false },
     featured: false,
   },
   {
@@ -336,7 +338,7 @@ export const collections: Collection[] = [
     name: "ASICS",
     description: "GEL technology meets fashion-forward running heritage.",
     productCount: products.filter((p) => p.collection === "asics").length,
-    image: { src: "", alt: "ASICS Collection", isPlaceholder: true, placeholderHue: 40 },
+    image: { src: "/products/coll-asics.jpg", alt: "ASICS Collection", isPlaceholder: false },
     featured: true,
   },
   {
@@ -345,7 +347,7 @@ export const collections: Collection[] = [
     name: "Converse",
     description: "Chuck 70s and elevated canvas essentials.",
     productCount: products.filter((p) => p.collection === "converse").length,
-    image: { src: "", alt: "Converse Collection", isPlaceholder: true, placeholderHue: 0 },
+    image: { src: "/products/coll-converse.jpg", alt: "Converse Collection", isPlaceholder: false },
     featured: false,
   },
   {
@@ -354,7 +356,7 @@ export const collections: Collection[] = [
     name: "Vans",
     description: "Old Skools and skate culture staples.",
     productCount: products.filter((p) => p.collection === "vans").length,
-    image: { src: "", alt: "Vans Collection", isPlaceholder: true, placeholderHue: 20 },
+    image: { src: "/products/coll-vans.jpg", alt: "Vans Collection", isPlaceholder: false },
     featured: false,
   },
   {
@@ -363,7 +365,7 @@ export const collections: Collection[] = [
     name: "HOKA",
     description: "Maximum cushion, modern silhouettes, everyday comfort.",
     productCount: products.filter((p) => p.collection === "hoka").length,
-    image: { src: "", alt: "HOKA Collection", isPlaceholder: true, placeholderHue: 260 },
+    image: { src: "/products/coll-hoka.jpg", alt: "HOKA Collection", isPlaceholder: false },
     featured: true,
   },
 ];
