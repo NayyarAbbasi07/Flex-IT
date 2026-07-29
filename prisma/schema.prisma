@@ -1,0 +1,194 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ConditionGrade {
+  A_PLUS
+  A
+  B_PLUS
+  B
+}
+
+enum Gender {
+  MEN
+  WOMEN
+  UNISEX
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  name         String?
+  passwordHash String
+  role         Role      @default(ADMIN)
+  rememberToken String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+}
+
+model Brand {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  logoUrl     String?
+  featured    Boolean   @default(false)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  products    Product[]
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  imageUrl    String?
+  enabled     Boolean   @default(true)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  products    Product[]
+}
+
+model Product {
+  id              String         @id @default(uuid())
+  name            String
+  slug            String         @unique
+  sku             String         @unique
+  description     String         @default("")
+  features        String[]       @default([])
+  tags            String[]       @default([])
+  brandId         String
+  categoryId      String?
+  gender          Gender         @default(UNISEX)
+  shoeType        String         @default("Sneakers")
+  condition       ConditionGrade @default(A)
+  originalBrand   String?
+  importedFrom    String?
+  color           String         @default("")
+  price           Int
+  discountPrice   Int?
+  currency        String         @default("PKR")
+  featured        Boolean        @default(false)
+  newArrival      Boolean        @default(true)
+  bestSeller      Boolean        @default(false)
+  status          ProductStatus  @default(DRAFT)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  deletedAt       DateTime?
+
+  brand           Brand          @relation(fields: [brandId], references: [id])
+  category        Category?      @relation(fields: [categoryId], references: [id])
+  images          ProductImage[]
+  inventory       ProductInventory[]
+
+  @@index([brandId])
+  @@index([categoryId])
+  @@index([status])
+  @@index([featured])
+  @@index([newArrival])
+}
+
+model ProductImage {
+  id        String   @id @default(uuid())
+  productId String
+  url       String
+  alt       String   @default("")
+  sortOrder Int      @default(0)
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model ProductInventory {
+  id        String   @id @default(uuid())
+  productId String
+  size      String
+  quantity  Int      @default(0)
+  lowStockAt Int     @default(2)
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, size])
+  @@index([productId])
+}
+
+model MediaAsset {
+  id        String    @id @default(uuid())
+  filename  String
+  url       String
+  mimeType  String
+  size      Int
+  folder    String    @default("uploads")
+  alt       String?
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  @@index([folder])
+}
+
+model StoreSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model HeroSection {
+  id              String   @id @default(uuid())
+  heading         String
+  subheading      String
+  description     String
+  primaryCtaText  String   @default("Shop Collection")
+  primaryCtaHref  String   @default("/shop")
+  secondaryCtaText String  @default("Contact on WhatsApp")
+  imageUrls       String[] @default([])
+  enabled         Boolean  @default(true)
+  updatedAt       DateTime @updatedAt
+}
+
+model Testimonial {
+  id          String    @id @default(uuid())
+  name        String
+  rating      Int       @default(5)
+  comment     String
+  productName String?
+  location    String?
+  sortOrder   Int       @default(0)
+  enabled     Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
+}
+
+model Faq {
+  id        String    @id @default(uuid())
+  question  String
+  answer    String
+  sortOrder Int       @default(0)
+  enabled   Boolean   @default(true)
+  deletedAt DateTime?
+}

@@ -2,9 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
-import type { ProductFilters, SortOption } from "@/types";
+import type { Product, ProductFilters, SortOption } from "@/types";
 import { CONDITION_LABELS } from "@/lib/config";
-import { filterProducts, getAllSizes, getBrands } from "@/lib/data";
 import { ProductGrid } from "@/components/products/ProductGrid";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -33,7 +32,81 @@ function filtersFromSearch(search: string): ProductFilters {
   };
 }
 
-export function ShopCatalog() {
+function applyFilters(products: Product[], filters: ProductFilters): Product[] {
+  let result = [...products];
+
+  if (filters.search) {
+    const q = filters.search.toLowerCase();
+    result = result.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.brand.toLowerCase().includes(q) ||
+        p.color.toLowerCase().includes(q) ||
+        p.tags.some((t) => t.toLowerCase().includes(q))
+    );
+  }
+
+  if (filters.brand) {
+    result = result.filter((p) => p.brand === filters.brand);
+  }
+
+  if (filters.collection) {
+    result = result.filter((p) => p.collection === filters.collection);
+  }
+
+  if (filters.size) {
+    result = result.filter((p) => {
+      const row = p.inventory?.find((i) => i.size === filters.size);
+      if (row) return row.available || !filters.availableOnly;
+      return p.sizes.includes(filters.size!);
+    });
+  }
+
+  if (filters.condition) {
+    result = result.filter((p) => p.condition === filters.condition);
+  }
+
+  if (filters.availableOnly) {
+    result = result.filter((p) => {
+      if (p.inventory?.length) return p.inventory.some((i) => i.available);
+      return p.availability === "available";
+    });
+  }
+
+  if (filters.featured) {
+    result = result.filter((p) => p.featured);
+  }
+
+  switch (filters.sort) {
+    case "price-asc":
+      result.sort((a, b) => a.price - b.price);
+      break;
+    case "price-desc":
+      result.sort((a, b) => b.price - a.price);
+      break;
+    case "name":
+      result.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case "featured":
+      result.sort((a, b) => Number(b.featured) - Number(a.featured));
+      break;
+    default:
+      result.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+  }
+
+  return result;
+}
+
+interface ShopCatalogProps {
+  products: Product[];
+  brands: string[];
+  sizes: string[];
+}
+
+export function ShopCatalog({ products, brands, sizes }: ShopCatalogProps) {
   const [filters, setFilters] = useState<ProductFilters>(defaultFilters);
   const [showFilters, setShowFilters] = useState(false);
 
@@ -41,9 +114,10 @@ export function ShopCatalog() {
     setFilters(filtersFromSearch(window.location.search));
   }, []);
 
-  const brands = getBrands();
-  const sizes = getAllSizes();
-  const products = useMemo(() => filterProducts(filters), [filters]);
+  const filtered = useMemo(
+    () => applyFilters(products, filters),
+    [products, filters]
+  );
 
   const update = (patch: Partial<ProductFilters>) =>
     setFilters((prev) => ({ ...prev, ...patch }));
@@ -202,11 +276,11 @@ export function ShopCatalog() {
 
       <p className={cn("mb-6 text-sm text-muted-foreground")}>
         Showing{" "}
-        <span className="font-semibold text-foreground">{products.length}</span>{" "}
+        <span className="font-semibold text-foreground">{filtered.length}</span>{" "}
         products
       </p>
 
-      <ProductGrid products={products} priorityCount={4} />
+      <ProductGrid products={filtered} priorityCount={4} />
     </div>
   );
 }

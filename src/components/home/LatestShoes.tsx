@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { getLatestProducts } from "@/lib/data";
+import { loadLatestProducts } from "@/lib/storefront";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading, AnimatedSection } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { ProductGrid } from "@/components/products/ProductGrid";
 
-export function LatestShoes() {
-  const products = getLatestProducts(8);
+export async function LatestShoes() {
+  const products = await loadLatestProducts(8);
 
   return (
     <AnimatedSection className="bg-muted/40 py-20 md:py-28">

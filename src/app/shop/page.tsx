@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { ShopCatalog } from "@/components/products/ShopCatalog";
+import { loadShopCatalogData } from "@/lib/storefront";
 
 export const metadata: Metadata = {
   title: "Shop",
@@ -8,7 +9,11 @@ export const metadata: Metadata = {
     "Browse curated imported thrift sneakers from Nike, Adidas, New Balance, HOKA, and more at Flex it!",
 };
 
-export default function ShopPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ShopPage() {
+  const { products, brands, sizes } = await loadShopCatalogData();
+
   return (
     <div className="pb-20 pt-28 md:pb-28 md:pt-32">
       <Container>
@@ -24,7 +29,7 @@ export default function ShopPage() {
             condition, and availability.
           </p>
         </div>
-        <ShopCatalog />
+        <ShopCatalog products={products} brands={brands} sizes={sizes} />
       </Container>
     </div>
   );

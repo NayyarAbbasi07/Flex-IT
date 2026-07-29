@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  getProductBySlug,
-  getRelatedProducts,
-  products,
-} from "@/lib/data";
+import { loadProductBySlug, loadRelatedProducts } from "@/lib/storefront";
+import { getStoreSettings } from "@/lib/settings";
 import { formatPrice } from "@/lib/utils";
 import { siteConfig } from "@/lib/config";
 import { Container } from "@/components/ui/Container";
@@ -17,15 +14,13 @@ interface ProductPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await loadProductBySlug(slug);
   if (!product) return { title: "Product not found" };
 
   const title = `${product.brand} ${product.name}`;
@@ -45,10 +40,13 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await loadProductBySlug(slug);
   if (!product) notFound();
 
-  const related = getRelatedProducts(product);
+  const [related, settings] = await Promise.all([
+    loadRelatedProducts(product),
+    getStoreSettings(),
+  ]);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -98,7 +96,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
           <ProductGallery product={product} />
-          <ProductInfo product={product} />
+          <ProductInfo
+            product={product}
+            whatsappNumber={settings.whatsappNumber}
+            whatsappTemplate={settings.whatsappDefaultMessage}
+          />
         </div>
 
         <p className="sr-only">

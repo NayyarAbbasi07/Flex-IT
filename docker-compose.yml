@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: flexit
+      POSTGRES_PASSWORD: flexit
+      POSTGRES_DB: flexit
+    ports:
+      - "5432:5432"
+    volumes:
+      - flexit_pg:/var/lib/postgresql/data
+
+volumes:
+  flexit_pg:

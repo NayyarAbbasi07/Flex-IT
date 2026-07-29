@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { collections } from "@/lib/data";
+import { loadCollections } from "@/lib/storefront";
 import { Container } from "@/components/ui/Container";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
@@ -10,7 +10,11 @@ export const metadata: Metadata = {
     "Explore Flex it! brand collections — Nike, Adidas, New Balance, HOKA, ASICS, and more.",
 };
 
-export default function CollectionsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function CollectionsPage() {
+  const collections = await loadCollections();
+
   return (
     <div className="pb-20 pt-28 md:pb-28 md:pt-32">
       <Container>

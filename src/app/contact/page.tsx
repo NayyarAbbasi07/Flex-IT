@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { ContactContent } from "@/components/contact/ContactContent";
+import { getStoreSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -8,7 +9,11 @@ export const metadata: Metadata = {
     "Contact Flex it! on WhatsApp for product availability, sizing, and nationwide delivery.",
 };
 
-export default function ContactPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ContactPage() {
+  const settings = await getStoreSettings();
+
   return (
     <div className="pb-20 pt-28 md:pb-28 md:pt-32">
       <Container>
@@ -24,7 +29,13 @@ export default function ContactPage() {
             personal, and clear.
           </p>
         </div>
-        <ContactContent />
+        <ContactContent
+          email={settings.email}
+          phone={settings.phone}
+          address={settings.address}
+          whatsappNumber={settings.whatsappNumber}
+          businessHours={settings.businessHours}
+        />
       </Container>
     </div>
   );

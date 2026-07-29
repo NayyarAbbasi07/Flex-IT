@@ -1,11 +1,15 @@
 import Link from "next/link";
-import { collections } from "@/lib/data";
+import type { Collection } from "@/types";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading, AnimatedSection } from "@/components/ui/SectionHeading";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 
-export function PremiumCollections() {
-  const items = collections.filter((c) => c.featured);
+interface PremiumCollectionsProps {
+  collections: Collection[];
+}
+
+export function PremiumCollections({ collections }: PremiumCollectionsProps) {
+  const items = collections.filter((c) => c.featured).slice(0, 5);
 
   return (
     <AnimatedSection className="py-20 md:py-28">

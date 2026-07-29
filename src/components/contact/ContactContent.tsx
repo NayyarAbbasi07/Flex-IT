@@ -2,11 +2,24 @@
 
 import { FormEvent, useState } from "react";
 import { MessageCircle, Mail, Phone, MapPin } from "lucide-react";
-import { siteConfig } from "@/lib/config";
 import { getGeneralWhatsAppUrl, buildWhatsAppUrl } from "@/lib/whatsapp";
 import { Button } from "@/components/ui/Button";
 
-export function ContactContent() {
+interface ContactContentProps {
+  email: string;
+  phone: string;
+  address: string;
+  whatsappNumber: string;
+  businessHours?: string;
+}
+
+export function ContactContent({
+  email,
+  phone,
+  address,
+  whatsappNumber,
+  businessHours,
+}: ContactContentProps) {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
 
@@ -19,31 +32,38 @@ export function ContactContent() {
       "",
       message || "I'd like to know more about your collection.",
     ].join("\n");
-    window.open(buildWhatsAppUrl(text), "_blank", "noopener,noreferrer");
+    window.open(
+      buildWhatsAppUrl(text, whatsappNumber),
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (
     <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
       <div className="space-y-6">
         <a
-          href={getGeneralWhatsAppUrl()}
+          href={getGeneralWhatsAppUrl(undefined, whatsappNumber)}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition hover:shadow-md focus-ring"
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#075E54]/15 text-[#075E54]">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-muted text-foreground">
             <MessageCircle className="h-5 w-5" />
           </span>
           <span>
             <span className="block font-semibold">WhatsApp</span>
-            <span className="mt-1 block text-sm text-muted-foreground">
-              {siteConfig.contact.phone}
-            </span>
+            <span className="mt-1 block text-sm text-muted-foreground">{phone}</span>
+            {businessHours && (
+              <span className="mt-1 block text-xs text-muted-foreground">
+                {businessHours}
+              </span>
+            )}
           </span>
         </a>
 
         <a
-          href={`mailto:${siteConfig.contact.email}`}
+          href={`mailto:${email}`}
           className="flex items-start gap-4 rounded-2xl border border-border bg-card p-5 transition hover:shadow-md focus-ring"
         >
           <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-muted">
@@ -51,9 +71,7 @@ export function ContactContent() {
           </span>
           <span>
             <span className="block font-semibold">Email</span>
-            <span className="mt-1 block text-sm text-muted-foreground">
-              {siteConfig.contact.email}
-            </span>
+            <span className="mt-1 block text-sm text-muted-foreground">{email}</span>
           </span>
         </a>
 
@@ -63,9 +81,7 @@ export function ContactContent() {
           </span>
           <div>
             <p className="font-semibold">Phone</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {siteConfig.contact.phone}
-            </p>
+            <p className="mt-1 text-sm text-muted-foreground">{phone}</p>
           </div>
         </div>
 
@@ -76,7 +92,7 @@ export function ContactContent() {
           <div>
             <p className="font-semibold">Location</p>
             <p className="mt-1 text-sm text-muted-foreground">
-              Nationwide delivery · {siteConfig.contact.city}
+              Nationwide delivery · {address}
             </p>
           </div>
         </div>

@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  collections,
-  filterProducts,
-  getCollectionBySlug,
-} from "@/lib/data";
+  loadCollectionBySlug,
+  loadFilteredProducts,
+} from "@/lib/storefront";
 import { Container } from "@/components/ui/Container";
 import { ProductGrid } from "@/components/products/ProductGrid";
 
@@ -13,15 +12,13 @@ interface CollectionPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  return collections.map((c) => ({ slug: c.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
 }: CollectionPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const collection = getCollectionBySlug(slug);
+  const collection = await loadCollectionBySlug(slug);
   if (!collection) return { title: "Collection not found" };
   return {
     title: collection.name,
@@ -31,10 +28,10 @@ export async function generateMetadata({
 
 export default async function CollectionPage({ params }: CollectionPageProps) {
   const { slug } = await params;
-  const collection = getCollectionBySlug(slug);
+  const collection = await loadCollectionBySlug(slug);
   if (!collection) notFound();
 
-  const products = filterProducts({
+  const products = await loadFilteredProducts({
     collection: collection.slug,
     sort: "newest",
   });

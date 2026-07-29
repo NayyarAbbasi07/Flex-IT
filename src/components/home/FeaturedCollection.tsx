@@ -1,13 +1,13 @@
+import { loadFeaturedProducts } from "@/lib/storefront";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { getFeaturedProducts } from "@/lib/data";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading, AnimatedSection } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { ProductGrid } from "@/components/products/ProductGrid";
 
-export function FeaturedCollection() {
-  const products = getFeaturedProducts(4);
+export async function FeaturedCollection() {
+  const products = await loadFeaturedProducts(4);
 
   return (
     <AnimatedSection className="py-20 md:py-28">

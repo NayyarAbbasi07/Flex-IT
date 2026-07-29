@@ -1,11 +1,15 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/config";
-import { collections, products } from "@/lib/data";
+import { loadCollections, loadFilteredProducts } from "@/lib/storefront";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url.replace(/\/$/, "");
+  const [products, collections] = await Promise.all([
+    loadFilteredProducts({ sort: "newest" }),
+    loadCollections(),
+  ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     "",

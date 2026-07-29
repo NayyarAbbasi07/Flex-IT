@@ -1,7 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { siteConfig } from "@/lib/config";
-import { collections } from "@/lib/data";
 import { getGeneralWhatsAppUrl } from "@/lib/whatsapp";
 import { Container } from "@/components/ui/Container";
 import {
@@ -10,9 +11,32 @@ import {
   TikTokIcon,
 } from "@/components/icons/SocialIcons";
 
-export function Footer() {
+export type FooterCollection = {
+  id: string;
+  slug: string;
+  name: string;
+};
+
+export type FooterSettings = {
+  brandName: string;
+  tagline: string;
+  email: string;
+  phone: string;
+  address: string;
+  whatsappNumber: string;
+  instagram: string;
+  facebook: string;
+  tiktok: string;
+};
+
+interface FooterProps {
+  settings: FooterSettings;
+  collections: FooterCollection[];
+}
+
+export function Footer({ settings, collections }: FooterProps) {
   const year = new Date().getFullYear();
-  const featuredCollections = collections.filter((c) => c.featured).slice(0, 5);
+  const featuredCollections = collections.slice(0, 5);
 
   return (
     <footer className="border-t border-border bg-muted/40">
@@ -23,15 +47,22 @@ export function Footer() {
               href="/"
               className="font-display text-2xl font-bold tracking-tight focus-ring rounded-sm"
             >
-              Flex it<span className="text-foreground/40">!</span>
+              {settings.brandName.includes("!") ? (
+                <>
+                  {settings.brandName.replace("!", "")}
+                  <span className="text-foreground/40">!</span>
+                </>
+              ) : (
+                settings.brandName
+              )}
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              {siteConfig.tagline}. Premium imported thrift fashion, curated
-              with care for the style-obsessed.
+              {settings.tagline}. Premium imported thrift fashion, curated with
+              care for the style-obsessed.
             </p>
             <div className="mt-6 flex items-center gap-3">
               <a
-                href={siteConfig.social.instagram}
+                href={settings.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -40,7 +71,7 @@ export function Footer() {
                 <InstagramIcon className="h-4 w-4" />
               </a>
               <a
-                href={siteConfig.social.facebook}
+                href={settings.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -49,7 +80,7 @@ export function Footer() {
                 <FacebookIcon className="h-4 w-4" />
               </a>
               <a
-                href={siteConfig.social.tiktok}
+                href={settings.tiktok}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
@@ -58,7 +89,7 @@ export function Footer() {
                 <TikTokIcon className="h-4 w-4" />
               </a>
               <a
-                href={getGeneralWhatsAppUrl()}
+                href={getGeneralWhatsAppUrl(undefined, settings.whatsappNumber)}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
@@ -120,17 +151,17 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
               <li>
                 <a
-                  href={`mailto:${siteConfig.contact.email}`}
+                  href={`mailto:${settings.email}`}
                   className="transition hover:text-foreground focus-ring rounded-sm"
                 >
-                  {siteConfig.contact.email}
+                  {settings.email}
                 </a>
               </li>
-              <li>{siteConfig.contact.phone}</li>
-              <li>{siteConfig.contact.city}</li>
+              <li>{settings.phone}</li>
+              <li>{settings.address}</li>
               <li>
                 <a
-                  href={getGeneralWhatsAppUrl()}
+                  href={getGeneralWhatsAppUrl(undefined, settings.whatsappNumber)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-medium text-foreground transition hover:opacity-70 focus-ring rounded-sm"
@@ -144,7 +175,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-border pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} {siteConfig.name}. All rights reserved.
+            © {year} {settings.brandName}. All rights reserved.
           </p>
           <p className="text-xs uppercase tracking-[0.18em]">
             Curated · Quality Checked · Nationwide Delivery

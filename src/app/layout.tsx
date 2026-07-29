@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Manrope, Syne } from "next/font/google";
 import { siteConfig } from "@/lib/config";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { getStoreSettings } from "@/lib/settings";
+import { loadCollections } from "@/lib/storefront";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -58,28 +60,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [settings, collections] = await Promise.all([
+    getStoreSettings(),
+    loadCollections(),
+  ]);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Store",
-    name: siteConfig.name,
+    name: settings.brandName || siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
-    telephone: siteConfig.contact.phone,
-    email: siteConfig.contact.email,
+    telephone: settings.phone,
+    email: settings.email,
     address: {
       "@type": "PostalAddress",
       addressCountry: "PK",
     },
-    sameAs: [
-      siteConfig.social.instagram,
-      siteConfig.social.facebook,
-      siteConfig.social.tiktok,
-    ],
+    sameAs: [settings.instagram, settings.facebook, settings.tiktok],
   };
 
   return (
@@ -98,7 +101,24 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <SiteShell>{children}</SiteShell>
+        <SiteShell
+          footerSettings={{
+            brandName: settings.brandName,
+            tagline: settings.tagline,
+            email: settings.email,
+            phone: settings.phone,
+            address: settings.address,
+            whatsappNumber: settings.whatsappNumber,
+            instagram: settings.instagram,
+            facebook: settings.facebook,
+            tiktok: settings.tiktok,
+          }}
+          footerCollections={collections
+            .filter((c) => c.featured)
+            .map((c) => ({ id: c.id, slug: c.slug, name: c.name }))}
+        >
+          {children}
+        </SiteShell>
       </body>
     </html>
   );

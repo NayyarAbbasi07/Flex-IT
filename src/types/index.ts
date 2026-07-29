@@ -24,6 +24,13 @@ export interface ProductImage {
   placeholderHue?: number;
 }
 
+export interface SizeInventory {
+  size: string;
+  quantity: number;
+  available: boolean;
+  lowStock?: boolean;
+}
+
 export interface Product {
   id: string;
   slug: string;
@@ -34,7 +41,10 @@ export interface Product {
   price: number;
   compareAtPrice?: number;
   currency: string;
+  /** All sizes including out-of-stock */
   sizes: string[];
+  /** Per-size stock; when omitted, all `sizes` are treated as available */
+  inventory?: SizeInventory[];
   condition: ProductCondition;
   availability: ProductAvailability;
   color: string;

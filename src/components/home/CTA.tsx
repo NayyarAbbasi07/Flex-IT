@@ -5,7 +5,12 @@ import { Container } from "@/components/ui/Container";
 import { AnimatedSection } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 
-export function CTA() {
+interface CTAProps {
+  whatsappNumber?: string;
+  whatsappMessage?: string;
+}
+
+export function CTA({ whatsappNumber, whatsappMessage }: CTAProps) {
   return (
     <AnimatedSection className="py-20 md:py-28">
       <Container>
@@ -33,7 +38,7 @@ export function CTA() {
                 </Button>
               </Link>
               <a
-                href={getGeneralWhatsAppUrl()}
+                href={getGeneralWhatsAppUrl(whatsappMessage, whatsappNumber)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto focus-ring rounded-xl"
