@@ -30,8 +30,9 @@ npm run dev
 
 - Storefront: http://localhost:3000
 - Admin: http://localhost:3000/admin/login  
-  (`admin@flexit.store` / `FlexitAdmin123!`)
+  (email `admin@flexit.store`; password = `ADMIN_PASSWORD` in `backend/.env`)
 - API: http://localhost:3001
+- Swagger: http://localhost:3001/api/docs
 
 ## Scripts
 

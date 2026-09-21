@@ -40,7 +40,7 @@
  *         password:
  *           type: string
  *           minLength: 6
- *           example: FlexitAdmin123!
+ *           example: your-admin-password
  *         remember:
  *           type: boolean
  *           default: false
@@ -117,7 +117,7 @@
  *                 example: admin@flexit.store
  *               password:
  *                 type: string
- *                 example: FlexitAdmin123!
+ *                 example: your-admin-password
  *               remember:
  *                 type: boolean
  *                 example: false

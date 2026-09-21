@@ -25,7 +25,7 @@ npm run dev
 
 **Default admin**
 - Email: `admin@flexit.store`
-- Password: `FlexitAdmin123!` (or `ADMIN_PASSWORD` in `backend/.env`)
+- Password: value of `ADMIN_PASSWORD` in `backend/.env` (set before `npm run db:seed`)
 
 ## What you can manage
 
