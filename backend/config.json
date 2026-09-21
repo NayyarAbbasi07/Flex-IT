@@ -1,0 +1,36 @@
+{
+  "app": {
+    "name": "Flex it! API",
+    "version": "0.1.0"
+  },
+  "server": {
+    "port": 3001,
+    "host": "0.0.0.0",
+    "bodyLimit": "2mb"
+  },
+  "cors": {
+    "origin": "http://localhost:3000",
+    "credentials": true
+  },
+  "auth": {
+    "cookieName": "flexit_token",
+    "jwtExpiresInSeconds": 28800,
+    "jwtRememberExpiresInSeconds": 2592000,
+    "cookieSameSite": "lax",
+    "bcryptRounds": 12
+  },
+  "uploads": {
+    "dir": "uploads",
+    "maxFileSize": 5242880,
+    "allowedMimeTypes": [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp"
+    ],
+    "mediaListLimit": 200
+  },
+  "store": {
+    "defaultWhatsappNumber": "923330215663"
+  }
+}

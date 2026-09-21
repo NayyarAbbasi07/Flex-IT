@@ -1,0 +1,18 @@
+module.exports = {
+  brandService: require('./brandService'),
+  productService: require('./productService'),
+  categoryService: require('./categoryService'),
+  authService: require('./authService'),
+  userService: require('./userService'),
+  mediaService: require('./mediaService'),
+  settingsService: require('./settingsService'),
+  heroService: require('./heroService'),
+  statsService: require('./statsService'),
+  collectionService: require('./collectionService'),
+  catalogService: require('./catalogService'),
+  faqService: require('./faqService'),
+  testimonialService: require('./testimonialService'),
+  inquiryService: require('./inquiryService'),
+  orderService: require('./orderService'),
+  prisma: require('./prisma').prisma,
+};

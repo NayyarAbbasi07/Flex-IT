@@ -1,0 +1,2 @@
+/** Inline before paint — prevents light flash when dark theme is preferred. */
+export const themeInitScript = `(function(){try{var t=localStorage.getItem('flexit-theme');var d=t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d){document.documentElement.classList.add('dark');document.documentElement.dataset.theme='dark';}else{document.documentElement.dataset.theme='light';}}catch(e){}})();`;
