@@ -1,5 +1,11 @@
-# dependencies
-node_modules
+# =========================
+# Flex it! monorepo
+# Next.js frontend + Express/Prisma backend
+# =========================
+
+# ----- Dependencies -----
+node_modules/
+**/node_modules/
 .pnp
 .pnp.*
 .yarn/*
@@ -7,62 +13,113 @@ node_modules
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.npm/
+.pnpm-store/
 
-# testing
-/coverage
-
-# next.js
-frontend/.next/
-frontend/out/
-.open-next
-
-# Cloudflare
-.wrangler
-.dev.vars
-
-# audits
-lighthouse-report.json
-lighthouse.html
-
-# production
-/build
-backend/dist
-backend/generated
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files — never commit real secrets
+# ----- Environment / secrets (never commit real values) -----
 .env
 .env.*
 !.env.example
 !**/.env.example
 **/.env
 **/.env.local
-**/.env.production
 **/.env.development
+**/.env.development.local
+**/.env.test
+**/.env.test.local
+**/.env.production
+**/.env.production.local
+.dev.vars
+*.pem
+*.p12
+*.key
+id_rsa
+id_rsa.pub
+*.secret
 
-# local IDE
-.vscode/
-.idea/
+# ----- Next.js (frontend) -----
+frontend/.next/
+frontend/out/
+frontend/build/
+.open-next/
+.vercel/
+next-env.d.ts
+frontend/next-env.d.ts
 
-# uploaded media
+# ----- Backend / Node -----
+backend/dist/
+backend/build/
+backend/generated/
+**/dist/
+**/build/
+*.tsbuildinfo
+
+# ----- Prisma -----
+backend/prisma/*.db
+backend/prisma/*.db-journal
+backend/prisma/dev.db
+backend/prisma/dev.db-journal
+
+# ----- Uploads / media (keep folder, ignore files) -----
 backend/uploads/*
 !backend/uploads/.gitkeep
 frontend/public/uploads/*
 !frontend/public/uploads/.gitkeep
 
-# vercel
-.vercel
+# ----- Logs & debug -----
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-frontend/next-env.d.ts
+# ----- Test / coverage -----
+coverage/
+**/coverage/
+.nyc_output/
+*.lcov
+playwright-report/
+test-results/
+.turbo/
+
+# ----- OS junk -----
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ----- Editors / IDE -----
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+
+# ----- Cloudflare / Wrangler -----
+.wrangler/
+.mf/
+
+# ----- Docker / local DB dumps -----
+*.sql.gz
+*.dump
+docker-data/
+
+# ----- Audits / reports -----
+lighthouse-report.json
+lighthouse.html
+.eslintcache
+.stylelintcache
+
+# ----- Misc -----
+*.local
+.cache/
+tmp/
+temp/
+.temp/
