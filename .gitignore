@@ -123,3 +123,10 @@ lighthouse.html
 tmp/
 temp/
 .temp/
+
+# ----- Local / AI / status docs (not needed on GitHub) -----
+ADMIN.md
+AGENTS.md
+CLAUDE.md
+PROJECT-STATUS.md
+backend/docs/BACKEND-STATUS.md
